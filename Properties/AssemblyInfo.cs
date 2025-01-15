@@ -8,11 +8,11 @@ using System.Windows;
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("GameOfLife")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("WPF-реализация игры «Жизнь» Джона Конвея.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GameOfLife")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyCompany("BSTU «VOENMEH» named after D. F. Ustinov")]
+[assembly: AssemblyProduct("Game of Life")]
+[assembly: AssemblyCopyright("Copyright © Ilia B. Anosov, 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -48,5 +48,5 @@ using System.Windows;
 //      Номер сборки
 //      Номер редакции
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2025.1.0.0")]
+[assembly: AssemblyFileVersion("2025.1.0.0")]
