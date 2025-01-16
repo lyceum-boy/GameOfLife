@@ -5,8 +5,211 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Background="DarkGray" Width="800" Height="590" MinWidth="800" MinHeight="590" Icon="/static/img/icon.png"
+        Title="Игра «Жизнь»" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged">
+    <DockPanel Loaded="DockPanel_Loaded">
+        <Menu Background="LightGray" DockPanel.Dock="Top" Padding="5,0,0,0" Focusable="False">
+            <MenuItem Header="Файл" Focusable="False">
+                <MenuItem x:Name="openFileMenuItem" Click="openFileMenuItem_Click" Header="Открыть" InputGestureText="Ctrl+O">
+                    <MenuItem.Icon>
+                        <Image Source="/static/img/load-file-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="saveFileMenuItem" Click="saveFileMenuItem_Click" Header="Сохранить" InputGestureText="Ctrl+S">
+                    <MenuItem.Icon>
+                        <Image Source="/static/img/save-file-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem x:Name="closeMenuItem" Click="closeMenuItem_Click" Header="Выход" InputGestureText="Ctrl+Q">
+                    <MenuItem.Icon>
+                        <Image Source="/static/img/close-app-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="rulesMenuItem" Click="rulesMenuItem_Click" Header="Правила игры" Focusable="False"/>
+            <MenuItem Header="Примеры" Focusable="False">
+                <MenuItem Click="exampleMenuItem_Click" Header="56P6H1V0">
+                    <MenuItem.Icon>
+                        <TextBlock Text="1" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="92P156">
+                    <MenuItem.Icon>
+                        <TextBlock Text="2" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="A for all">
+                    <MenuItem.Icon>
+                        <TextBlock Text="3" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="aVerage">
+                    <MenuItem.Icon>
+                        <TextBlock Text="4" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Backrake">
+                    <MenuItem.Icon>
+                        <TextBlock Text="5" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Beluchenko's p51">
+                    <MenuItem.Icon>
+                        <TextBlock Text="6" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Bi-block fuse">
+                    <MenuItem.Icon>
+                        <TextBlock Text="7" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Big glider">
+                    <MenuItem.Icon>
+                        <TextBlock Text="8" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Gosper Glider Gun">
+                    <MenuItem.Icon>
+                        <TextBlock Text="9" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="LIFE">
+                    <MenuItem.Icon>
+                        <TextBlock Text="10" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Click="exampleMenuItem_Click" Header="Pulsar-4">
+                    <MenuItem.Icon>
+                        <TextBlock Text="11" TextAlignment="Right"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="aboutMenuItem" Click="aboutMenuItem_Click" Header="О программе" Focusable="False"/>
+        </Menu>
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Canvas x:Name="gameFieldCanvas" Background="DarkSlateGray" 
+                        MinWidth="580" MinHeight="580" Loaded="gameFieldCanvas_Loaded"
+                        AllowDrop="True" DragEnter="gameFieldCanvas_DragEnter" Drop="gameFieldCanvas_Drop"/>
+            </Viewbox>
+            <Grid Grid.Column="2" Grid.Row="1" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Поколение:" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Популяция:" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    <TextBox x:Name="generationTextBox" Grid.Row="0" Grid.Column="2" Width="70" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0,2" IsEnabled="False"/>
+                    <TextBox x:Name="populationTextBox" Grid.Row="2" Grid.Column="2" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Center" Margin="0,5,0,0" IsEnabled="False"/>
+                </Grid>
+                <Button x:Name="toggleButton" Grid.Column="1" Grid.Row="2" Width="150" Height="50" Content="Запустить" HorizontalAlignment="Center" VerticalAlignment="Center" Click="toggleButton_Click" Focusable="False"/>
+                <Rectangle Grid.Column="1" Grid.Row="2" Width="230" Height="1" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top"/>
+                <Grid Grid.Column="1" Grid.Row="3" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RepeatButton x:Name="nextRepeatButton" Grid.Column="0" Grid.Row="0" Width="100" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="nextRepeatButton_Click" Focusable="False">
+                        <TextBlock TextAlignment="Center">Следующее<LineBreak/>поколение</TextBlock>
+                    </RepeatButton>
+                    <Button x:Name="restartButton" Grid.Column="2" Grid.Row="0" Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Click="restartButton_Click" Focusable="False">
+                        <TextBlock TextAlignment="Center">Перезапуск</TextBlock>
+                    </Button>
+                    <Rectangle Grid.ColumnSpan="3" Grid.Row="0" Width="230" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="Black"/>
+                </Grid>
+                <Rectangle Grid.Column="1" Grid.Row="3" Width="230" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="Black"/>
+                <Grid Grid.Column="1" Grid.Row="4" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="randomFieldButton" Grid.Column="0" Grid.Row="0" Width="100" Height="50" HorizontalAlignment="Right" VerticalAlignment="Center" Click="randomFieldButton_Click" Focusable="False">
+                        <TextBlock TextAlignment="Center">Случайное<LineBreak/>поле</TextBlock>
+                    </Button>
+                    <Button x:Name="clearButton" Grid.Column="2" Grid.Row="0" Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Click="clearButton_Click" Focusable="False">
+                        <TextBlock TextAlignment="Center">Очистить<LineBreak/>поле</TextBlock>
+                    </Button>
+                    <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Width="230" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="Black"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="5" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="Скорость смены поколений" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Slider x:Name="speedSlider" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Width="150" HorizontalAlignment="Center" VerticalAlignment="Top" Maximum="100"
+                            PreviewMouseDown="speedSlider_PreviewMouseDown"  ValueChanged="speedSlider_ValueChanged" Focusable="False"/>
+                    <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Width="230" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="Black"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="6" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Content="Размер игрового поля" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <RepeatButton x:Name="decreaseSizeRepeatButton" Grid.Column="0" Grid.Row="2" Width="30" Height="30" Content="–"
+                                  HorizontalAlignment="Right" VerticalAlignment="Top" Click="decreaseSizeRepeatButton_Click" Focusable="False"/>
+                    <Label x:Name="sizeLabel" Grid.Column="1" Grid.Row="2" Height="30" Content="30 x 30" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <RepeatButton x:Name="increaseSizeRepeatButton" Grid.Column="3" Grid.Row="2" Width="30" Height="30" Content="+"
+                                  HorizontalAlignment="Left" VerticalAlignment="Top" Click="increaseSizeRepeatButton_Click" Focusable="False"/>
+                    <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Width="230" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="Black"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
