@@ -41,6 +41,20 @@ namespace GameOfLife
                         break;
                 }
             }
+            else
+            {
+                switch (e.Key)
+                {
+                    case Key.Enter:
+                        Close();
+                        e.Handled = true;
+                        break;
+                    case Key.Escape:
+                        Close();
+                        e.Handled = true;
+                        break;
+                }
+            }
         }
     }
 }

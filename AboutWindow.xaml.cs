@@ -88,6 +88,20 @@ namespace GameOfLife
                         break;
                 }
             }
+            else
+            {
+                switch (e.Key)
+                {
+                    case Key.Enter:
+                        closeButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); // Имитация нажатия кнопки.
+                        e.Handled = true;
+                        break;
+                    case Key.Escape:
+                        closeButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); // Имитация нажатия кнопки.
+                        e.Handled = true;
+                        break;
+                }
+            }
         }
     }
 }

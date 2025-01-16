@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
         Background="DarkSlateGray" Width="420" Height="295" WindowStyle="None" ResizeMode="NoResize"
-        ShowInTaskbar="False" Title="О программе" WindowStartupLocation="CenterOwner">
+        ShowInTaskbar="False" Title="О программе" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -54,7 +54,7 @@
             <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Foreground="White" Content="Powered by Windows Presentation Foundation" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label x:Name="copyrightLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
-        <Button Grid.Column="4" Grid.Row="6" Content="Закрыть"
+        <Button x:Name="closeButton" Grid.Column="4" Grid.Row="6" Content="Закрыть"
                 HorizontalAlignment="Right" VerticalAlignment="Center"
                 Width="70" Height="20" Click="CloseButton_Click"/>
     </Grid>
