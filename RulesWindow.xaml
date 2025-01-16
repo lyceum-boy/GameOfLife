@@ -1,0 +1,114 @@
+﻿<Window x:Class="GameOfLife.RulesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameOfLife"
+        mc:Ignorable="d"
+        Background="Gainsboro" Width="420" Height="295" WindowStyle="ThreeDBorderWindow" Icon="/static/img/icon.png"
+        ResizeMode="CanMinimize" Title="Правила игры" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="1">
+            <FlowDocument PagePadding="5">
+                <Paragraph FontSize="11" TextAlignment="Justify" Margin="0,0,0,0" Padding="0,0,5,0" FontFamily="Corbel" TextIndent="10">
+                    <Run Text="Игра «Жизнь» – это уникальный клеточный автомат, разработанный английским математиком Джоном Конвеем в 1970 году. В отличие от традиционных компьютерных игр, она не требует участия игроков."/>
+                </Paragraph>
+                <Paragraph FontSize="11" TextAlignment="Justify" Margin="0,3,0,10" Padding="0,0,5,0" FontFamily="Corbel" TextIndent="10">
+                    <Run Text="Игровое поле представляет собой сетку клеток, поведение которых определяется несколькими математическими правилами. В зависимости от этих правил клетки могут оживать, умирать или размножаться, формируя разнообразные узоры в ходе своей эволюции."/>
+                </Paragraph>
+                <!-- Горизонтальная линия -->
+                <BlockUIContainer>
+                    <Line X1="0" X2="350" Stroke="Black" StrokeThickness="1"/>
+                </BlockUIContainer>
+                <!-- Таблица с правилами -->
+                <Table Margin="0,7,0,0">
+                    <Table.Columns>
+                        <TableColumn Width="2*"/>
+                        <TableColumn Width="1*"/>
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <!-- Правило 1 -->
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph FontSize="12" TextAlignment="Left" Margin="5,0,0,0" Padding="10,0,0,0" FontFamily="Corbel" TextIndent="-12">
+                                    <Run Text="1." FontWeight="Bold"/>
+                                    <Run Text="Каждая клетка, имеющая всего одного соседа или не имеющая ни единого, погибает"/>
+                                    <Run Text="«в одиночестве»" FontStyle="Italic" TextDecorations="Underline"/>
+                                    <Run Text="."/>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <BlockUIContainer Margin="0,3,0,0">
+                                    <Image Width="100" Source="/static/img/rule-1.png"/>
+                                </BlockUIContainer>
+                            </TableCell>
+                        </TableRow>
+                        <!-- Правило 2 -->
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph FontSize="12" TextAlignment="Left" Margin="5,9,0,0" Padding="10,0,0,0" FontFamily="Corbel" TextIndent="-12">
+                                    <Run Text="2." FontWeight="Bold"/>
+                                    <Run Text="Каждая клетка, y которой четыре и более соседей, погибает"/>
+                                    <Run Text="«от перенаселения»" FontStyle="Italic" TextDecorations="Underline"/>
+                                    <Run Text="."/>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <BlockUIContainer Margin="0,5,0,0">
+                                    <Image Width="100" Source="/static/img/rule-2.png"/>
+                                </BlockUIContainer>
+                            </TableCell>
+                        </TableRow>
+                        <!-- Правило 3 -->
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph FontSize="12" TextAlignment="Left" Margin="5,9,0,0" Padding="10,0,0,0" FontFamily="Corbel" TextIndent="-12">
+                                    <Run Text="3." FontWeight="Bold"/>
+                                    <Run Text="Каждая клетка, y которой два или три соседа," />
+                                    <Run Text="«выживает»" FontStyle="Italic" TextDecorations="Underline"/>
+                                    <Run Text="."/>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <BlockUIContainer Margin="0,5,0,0">
+                                    <Image Width="100" Source="/static/img/rule-3.png"/>
+                                </BlockUIContainer>
+                            </TableCell>
+                        </TableRow>
+                        <!-- Правило 4 -->
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph FontSize="12" TextAlignment="Left" Margin="5,9,0,0" Padding="10,0,0,0" FontFamily="Corbel" TextIndent="-12">
+                                    <Run Text="4." FontWeight="Bold"/>
+                                    <Run Text="Каждая ячейка c тремя соседями становится"/>
+                                    <Run Text="«заселенной»" FontStyle="Italic" TextDecorations="Underline"/>
+                                    <Run Text="."/>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <BlockUIContainer Margin="0,5,0,0">
+                                    <Image Width="100" Source="/static/img/rule-4.png"/>
+                                </BlockUIContainer>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <Button Grid.Column="1" Grid.Row="3" Background="LightGray" Content="Закрыть" 
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Width="70" Height="20" Click="closeButton_Click"/>
+    </Grid>
+</Window>
