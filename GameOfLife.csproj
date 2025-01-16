@@ -55,6 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RulesWindow.xaml.cs">
+      <DependentUpon>RulesWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +77,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RulesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -90,9 +104,39 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="README.md" />
+    <None Include="static\golf\56P6H1V0.golf" />
+    <None Include="static\golf\92P156.golf" />
+    <None Include="static\golf\A for all.golf" />
+    <None Include="static\golf\aVerage.golf" />
+    <None Include="static\golf\Backrake.golf" />
+    <None Include="static\golf\Beluchenko%27s p51.golf" />
+    <None Include="static\golf\Bi-block fuse.golf" />
+    <None Include="static\golf\Big glider.golf" />
+    <None Include="static\golf\Gosper Glider Gun.golf" />
+    <None Include="static\golf\LIFE.golf" />
+    <None Include="static\golf\Pulsar-4.golf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LICENSE.txt" />
+    <Resource Include="static\img\about-header.jpg" />
+    <Resource Include="static\img\close-app-icon.png" />
+    <Resource Include="static\img\icon.ico" />
+    <Resource Include="static\img\icon.png" />
+    <Resource Include="static\img\load-file-icon.png" />
+    <Resource Include="static\img\rule-1.png" />
+    <Resource Include="static\img\rule-2.png" />
+    <Resource Include="static\img\rule-3.png" />
+    <Resource Include="static\img\rule-4.png" />
+    <Resource Include="static\img\save-file-icon.png" />
+    <Resource Include="static\otf\ROGFonts-Regular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameOfLife", "GameOfLife.csproj", "{53D1B9B7-3F09-494A-BF62-2E65A76731E7}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GameOfLifeSetup", "..\GameOfLifeSetup\GameOfLifeSetup.vdproj", "{0BC3519B-E8DC-4833-8662-F7625BA9AA45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{53D1B9B7-3F09-494A-BF62-2E65A76731E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D1B9B7-3F09-494A-BF62-2E65A76731E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D1B9B7-3F09-494A-BF62-2E65A76731E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC3519B-E8DC-4833-8662-F7625BA9AA45}.Debug|Any CPU.ActiveCfg = Debug
+		{0BC3519B-E8DC-4833-8662-F7625BA9AA45}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
