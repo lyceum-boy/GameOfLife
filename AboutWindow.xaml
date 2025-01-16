@@ -1,0 +1,61 @@
+﻿<Window x:Class="GameOfLife.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameOfLife"
+        mc:Ignorable="d"
+        Background="DarkSlateGray" Width="420" Height="295" WindowStyle="None" ResizeMode="NoResize"
+        ShowInTaskbar="False" Title="О программе" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="105"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Source="/static/img/about-header.jpg" VerticalAlignment="Top"/>
+        <Image Grid.Column="1" Grid.Row="3" Source="/static/img/icon.png" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+        <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="3" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="4"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="4"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="4"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="productLabel" Grid.Column="0" Grid.Row="0" Foreground="White" Content="Game of Life" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="pack://application:,,,/static/otf/#ROG Fonts" FontSize="14"/>
+            <Label x:Name="versionLabel" Grid.Column="1" Grid.Row="0" Foreground="White" Content="2025.1.0.1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/static/otf/#ROG Fonts" FontSize="14"/>
+            <Label x:Name="builtOnLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Foreground="White" Content="Built on " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="13" FontWeight="Bold"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Foreground="White" Content="Developer: Ilia B. Anosov" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Foreground="White" Content="Email: o737b04@voenmeh.ru" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Foreground="White" Content="GitHub: lyceum-boy" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Foreground="White" Content="Powered by Windows Presentation Foundation" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label x:Name="copyrightLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Foreground="White" Content="Copyright © Ilia B. Anosov, 2025" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+        <Button Grid.Column="4" Grid.Row="6" Content="Закрыть"
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Width="70" Height="20" Click="CloseButton_Click"/>
+    </Grid>
+</Window>
