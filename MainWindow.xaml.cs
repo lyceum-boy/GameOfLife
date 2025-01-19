@@ -41,7 +41,7 @@ namespace GameOfLife
         private int fieldWidth = 30; // Ширина сетки игрового поля по умолчанию.
         private int fieldHeight = 30; // Высота сетки игрового поля по умолчанию.
 
-        public Rectangle[,] matrix; // Представление состояния поля.
+        private Rectangle[,] matrix; // Представление состояния поля.
         private Rectangle[,] previousMatrix; // Предыдущее состояние поля.
 
         private readonly DispatcherTimer timer = new DispatcherTimer(); // Игровой таймер.
@@ -152,6 +152,7 @@ namespace GameOfLife
         private void SaveFieldState()
         {
             previousMatrix = new Rectangle[fieldHeight, fieldWidth];
+
             for (int y = 0; y < fieldHeight; y++)
             {
                 for (int x = 0; x < fieldWidth; x++)
@@ -193,25 +194,6 @@ namespace GameOfLife
         private void ClearSavedState()
         {
             savedState = null;
-        }
-
-        private void cell_MouseEnter(object sender, MouseEventArgs e)
-        {
-            bool leftButton = e.LeftButton == MouseButtonState.Pressed;
-            if (!leftButton) return;
-
-            Rectangle pixel = (Rectangle)sender;
-            pixel.Fill = pixel.Fill == ON ? OFF : ON;
-
-            UpdateUI();
-            SaveState();
-            SaveFieldState();
-        }
-
-        private void cell_MouseClick(object sender, MouseEventArgs e)
-        {
-            ToggleStartStopGame(STOP);
-            cell_MouseEnter(sender, e);
         }
 
         private void BuildGameField()
@@ -417,7 +399,7 @@ namespace GameOfLife
                     unchangedGenerationCount = 0; // Поле изменилось, сброс счётчика.
                     SaveFieldState();
 
-                    StopGameWithMessage("Комбинация живых клеток стала стабильной и больше не изменяется!");
+                    StopGameWithMessage("Комбинация живых клеток стала стабильной\nи больше не изменяется!");
                     return;
                 }
             }
@@ -521,7 +503,7 @@ namespace GameOfLife
                 if (newHeight < minFieldSize || newHeight > maxFieldSize || newWidth < minFieldSize || newWidth > maxFieldSize)
                 {
                     MessageBox.Show(
-                        "Размер поля в файле превосходит максимально допустимый размер!",
+                        "Размер поля в файле превосходит минимальный или максимальный допустимый размер!",
                         "Ошибка",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error
@@ -551,7 +533,7 @@ namespace GameOfLife
                     if (gameFieldSizeChanged)
                     {
                         MessageBox.Show(
-                            "Поле загружено успешно!",
+                            "Размер поля изменён.\nПоле загружено успешно!",
                             "Загрузка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Information
@@ -560,7 +542,7 @@ namespace GameOfLife
                     else
                     {
                         MessageBox.Show(
-                            "Размер поля изменён.\nПоле загружено успешно!",
+                            "Поле загружено успешно!",
                             "Загрузка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Information
@@ -608,20 +590,6 @@ namespace GameOfLife
             }
         }
 
-        private bool IsClickOnThumb(Slider slider, MouseButtonEventArgs e)
-        {
-            // Получение Track из Slider.
-            if (slider.Template.FindName("PART_Track", slider) is Track track)
-            {
-                // Проверка был ли клик сделан на Thumb.
-                Point clickPosition = e.GetPosition(track.Thumb);
-                return clickPosition.X >= 0 && clickPosition.X <= track.Thumb.ActualWidth
-                       && clickPosition.Y >= 0 && clickPosition.Y <= track.Thumb.ActualHeight;
-            }
-
-            return false; // Если Track не найден, считается, что клик не на Thumb.
-        }
-
         private bool ConfirmExit()
         {
             ToggleStartStopGame(STOP);
@@ -639,6 +607,25 @@ namespace GameOfLife
         }
 
         // Обработчики событий.
+
+        private void cell_MouseEnter(object sender, MouseEventArgs e)
+        {
+            bool leftButton = e.LeftButton == MouseButtonState.Pressed;
+            if (!leftButton) return;
+
+            Rectangle pixel = (Rectangle)sender;
+            pixel.Fill = pixel.Fill == ON ? OFF : ON;
+
+            UpdateUI();
+            SaveState();
+            SaveFieldState();
+        }
+
+        private void cell_MouseClick(object sender, MouseEventArgs e)
+        {
+            ToggleStartStopGame(STOP);
+            cell_MouseEnter(sender, e);
+        }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -933,6 +920,8 @@ namespace GameOfLife
 
         private void gameFieldCanvas_DragEnter(object sender, DragEventArgs e)
         {
+            ToggleStartStopGame(STOP);
+
             // Проверка, что перетаскиваемые данные — это файлы.
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -956,6 +945,8 @@ namespace GameOfLife
 
         private void gameFieldCanvas_Drop(object sender, DragEventArgs e)
         {
+            ToggleStartStopGame(STOP);
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -1013,13 +1004,26 @@ namespace GameOfLife
             BuildGameField();
         }
 
+        private bool IsClickOnThumb(Slider slider, MouseButtonEventArgs e)
+        {
+            // Получение Track из Slider.
+            if (slider.Template.FindName("PART_Track", slider) is Track track)
+            {
+                // Проверка был ли клик сделан на Thumb.
+                Point clickPosition = e.GetPosition(track.Thumb);
+                return clickPosition.X >= 0 && clickPosition.X <= track.Thumb.ActualWidth
+                       && clickPosition.Y >= 0 && clickPosition.Y <= track.Thumb.ActualHeight;
+            }
+
+            return false; // Если Track не найден, считается, что клик не на Thumb.
+        }
+
         private void speedSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Slider slider = (Slider)sender;
 
             // Проверка, куда сделан клик.
-            if (IsClickOnThumb(slider, e))
-                return; // Если клик на Thumb, выход.
+            if (IsClickOnThumb(slider, e)) return; // Если клик на Thumb, выход.
 
             // Получение позиции мыши относительно Slider.
             Point clickPosition = e.GetPosition(slider);

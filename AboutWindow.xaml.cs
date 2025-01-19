@@ -25,17 +25,24 @@ namespace GameOfLife
         public AboutWindow()
         {
             InitializeComponent();
-            
-            string version = GetAppVersion(); // Версия программы.
+
             string productName = GetAppProductName(); // Имя продукта.
+            string version = GetAppVersion(); // Версия программы.
             string buildDate = GetBuildDate(); // Дата сборки.
             string copyright = GetCopyright(); // Копирайт.
 
             // Установка текст в элементы интерфейса.
-            versionLabel.Content = $"{version}";
             productLabel.Content = $"{productName}";
+            versionLabel.Content = $"{version}";
             builtOnLabel.Content += $"{buildDate}";
             copyrightLabel.Content = $"{copyright}";
+        }
+
+        private string GetAppProductName()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var attributes = assembly.GetCustomAttribute<AssemblyProductAttribute>();
+            return attributes?.Product ?? "Неизвестное имя продукта";
         }
 
         private string GetAppVersion()
@@ -46,13 +53,6 @@ namespace GameOfLife
             var version = assembly.GetName().Version;
             // Преобразование версии в строку.
             return version?.ToString() ?? "Неизвестная версия";
-        }
-
-        private string GetAppProductName()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var attributes = assembly.GetCustomAttribute<AssemblyProductAttribute>();
-            return attributes?.Product ?? "Неизвестное имя продукта";
         }
 
         private string GetBuildDate()

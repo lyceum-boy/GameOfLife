@@ -107,8 +107,8 @@
                 </Table>
             </FlowDocument>
         </FlowDocumentScrollViewer>
-        <Button Grid.Column="1" Grid.Row="3" Background="LightGray" Content="Закрыть" 
-                HorizontalAlignment="Right" VerticalAlignment="Center"
+        <Button x:Name="closeButton" Grid.Column="1" Grid.Row="3" Background="LightGray"
+                Content="Закрыть" HorizontalAlignment="Right" VerticalAlignment="Center"
                 Width="70" Height="20" Click="closeButton_Click"/>
     </Grid>
 </Window>
