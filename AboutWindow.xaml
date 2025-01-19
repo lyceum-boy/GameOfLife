@@ -49,8 +49,19 @@
             <Label x:Name="versionLabel" Grid.Column="1" Grid.Row="0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/static/otf/#ROG Fonts" FontSize="14"/>
             <Label x:Name="builtOnLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Foreground="White" Content="Built on " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="13" FontWeight="Bold"/>
             <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Foreground="White" Content="Developer: Ilia B. Anosov" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Foreground="White" Content="Email: o737b04@voenmeh.ru" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Foreground="White" Content="GitHub: lyceum-boy" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock>
+                    Email:
+                    <Hyperlink NavigateUri="mailto:o737b04@voenmeh.ru" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF78B4F3">o737b04@voenmeh.ru</Hyperlink>
+                </TextBlock>
+            </Label>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock>
+                    GitHub:
+                    <Hyperlink NavigateUri="https://github.com/lyceum-boy" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF78B4F3">lyceum-boy</Hyperlink>
+                </TextBlock>
+            </Label>
+
             <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Foreground="White" Content="Powered by Windows Presentation Foundation" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label x:Name="copyrightLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>

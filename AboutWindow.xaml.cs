@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GameOfLife
@@ -69,6 +70,12 @@ namespace GameOfLife
             var assembly = Assembly.GetExecutingAssembly();
             var attributes = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
             return attributes?.Copyright ?? "Нет данных о копирайте";
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
